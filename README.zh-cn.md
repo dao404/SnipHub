@@ -1,7 +1,7 @@
 # SnipHub
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=sniphub)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Frank6.sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=Frank6.sniphub)
 
 **🌍 README:** [English](README.md) | [中文](README.zh-cn.md)
 

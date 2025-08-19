@@ -1,7 +1,7 @@
 # SnipHub
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=sniphub)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Frank6.sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=Frank6.sniphub)
 
 A convenient VS Code extension for code snippet management, allowing you to easily define and manage code snippets within your project directory and quickly apply them through intelligent code completion suggestions.
 
