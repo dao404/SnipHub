@@ -28,6 +28,8 @@ export interface Snippet {
     createdAt: Date;
     /** 最后更新时间 */
     updatedAt: Date;
+    /** 文件扩展名 */
+    extension?: string;
 }
 
 /**

@@ -71,7 +71,7 @@ export class SnippetExplorerProvider implements vscode.TreeDataProvider<SnippetT
             const snippets = await this.snippetManager.loadAllSnippets();
             return snippets.map(snippet => 
                 new SnippetTreeItem(
-                    snippet.displayName + " (" + snippet.name + " - " + snippet.language + ")",
+                    snippet.displayName || snippet.name,  // 显示名称或片段名称
                     vscode.TreeItemCollapsibleState.None,  // 片段项目不可展开
                     ItemType.Snippet,
                     snippet,  // 将片段数据传递给树项目
@@ -183,23 +183,83 @@ export class SnippetTreeItem extends vscode.TreeItem {
 
     /**
      * 根据项目类型获取对应的图标
-     * 使用 VS Code 内置的主题图标，确保与编辑器主题一致
-     * @returns VS Code 主题图标对象
+     * 使用 VS Code 内置的文件图标系统，确保与资源管理器一致
+     * @returns VS Code 图标对象
      */
-    private getIcon(): vscode.ThemeIcon {
+    private getIcon(): vscode.ThemeIcon | undefined {
         switch (this.contextValue) {
             case 'snippet-category':
                 return new vscode.ThemeIcon('code');           // 代码图标 - 代表代码片段分类
             case 'packs-category':
                 return new vscode.ThemeIcon('folder');         // 文件夹图标 - 代表片段集分类
             case 'snippet-item':
-                return new vscode.ThemeIcon('symbol-snippet'); // 片段图标 - 代表单个代码片段
+                // 为片段使用文件扩展名对应的图标
+                if (this.data && this.data.extension) {
+                    // 创建一个虚拟文件名，用于获取对应的文件图标
+                    const fileName = `file.${this.data.extension.toLowerCase()}`;
+                    // 设置 resourceUri 以获取正确的文件图标
+                    this.resourceUri = vscode.Uri.parse(`file:///fake/${fileName}`);
+                    return undefined; // 返回 undefined 让 VS Code 使用 resourceUri 的文件图标
+                }
+                return new vscode.ThemeIcon('symbol-snippet'); // 默认片段图标 - 无法确定类型时使用
             case 'packs-item':
                 return new vscode.ThemeIcon('folder-opened');  // 打开的文件夹图标 - 代表片段集
             case 'snippet-file-item':
-                return new vscode.ThemeIcon('file');           // 文件图标 - 代表片段集中的文件
+                // 为片段文件使用语言对应的图标
+                if (this.data && this.data.language) {
+                    // 从语言映射到对应的文件扩展名
+                    const ext = this.languageToExtension(this.data.language);
+                    if (ext) {
+                        // 创建一个虚拟文件名，用于获取对应的文件图标
+                        const fileName = `file.${ext.toLowerCase()}`;
+                        // 设置 resourceUri 以获取正确的文件图标
+                        this.resourceUri = vscode.Uri.parse(`file:///fake/${fileName}`);
+                        return undefined; // 返回 undefined 让 VS Code 使用 resourceUri 的文件图标
+                    }
+                }
+                return new vscode.ThemeIcon('file');           // 默认文件图标
             default:
-                return new vscode.ThemeIcon('question');       // 问号图标 - 未知类型的默认图标
+                return new vscode.ThemeIcon('file');           // 默认为文件图标
         }
+    }
+
+    /**
+     * 根据语言获取对应的文件扩展名
+     * 用于为不同语言的代码片段选择合适的图标
+     * @param language 语言标识符
+     * @returns 对应的文件扩展名
+     */
+    private languageToExtension(language: string): string {
+        // 语言到扩展名的映射
+        const langToExt: Record<string, string> = {
+            'javascript': 'js',
+            'typescript': 'ts',
+            'javascriptreact': 'jsx',
+            'typescriptreact': 'tsx',
+            'html': 'html',
+            'css': 'css',
+            'scss': 'scss',
+            'sass': 'sass',
+            'less': 'less',
+            'json': 'json',
+            'markdown': 'md',
+            'python': 'py',
+            'java': 'java',
+            'c': 'c',
+            'cpp': 'cpp',
+            'csharp': 'cs',
+            'go': 'go',
+            'php': 'php',
+            'ruby': 'rb',
+            'rust': 'rs',
+            'shell': 'sh',
+            'bat': 'bat',
+            'powershell': 'ps1',
+            'sql': 'sql',
+            'xml': 'xml',
+            'yaml': 'yaml'
+        };
+        
+        return langToExt[language.toLowerCase()] || '';
     }
 }

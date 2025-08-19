@@ -88,25 +88,54 @@ export class SnippetManager {
         try {
             const snippets: Snippet[] = [];
 
-            // 加载 .snip 格式的片段文件
+            // 加载 snip 目录下的所有文件，包括所有子目录
             const snipDir = path.join(this.storageDir, 'snip');
             if (await fs.pathExists(snipDir)) {
-                const snipFiles = await fs.readdir(snipDir);
-                for (const file of snipFiles) {
-                    if (file.endsWith('.snip')) {
-                        const filePath = path.join(snipDir, file);
-                        const snippet = await this.parseSnipFile(filePath);
-                        if (snippet) {
-                            snippets.push(snippet);
-                        }
-                    }
-                }
+                // 递归加载所有子目录中的所有文件
+                await this.loadSnippetsFromDirectory(snipDir, snippets);
             }
 
             return snippets.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
         } catch (error) {
             console.error('加载片段失败:', error);
             return [];
+        }
+    }
+    
+    /**
+     * 递归加载目录中的所有文件
+     * @param directory 要扫描的目录路径
+     * @param snippets 用于存储加载的片段的数组
+     */
+    private async loadSnippetsFromDirectory(directory: string, snippets: Snippet[]): Promise<void> {
+        try {
+            const entries = await fs.readdir(directory, { withFileTypes: true });
+            
+            for (const entry of entries) {
+                const fullPath = path.join(directory, entry.name);
+                
+                if (entry.isDirectory()) {
+                    // 递归处理子目录
+                    await this.loadSnippetsFromDirectory(fullPath, snippets);
+                } else if (entry.isFile()) {
+                    // 处理所有文件
+                    if (entry.name.endsWith('.snip')) {
+                        // 处理 .snip 文件
+                        const snippet = await this.parseSnipFile(fullPath);
+                        if (snippet) {
+                            snippets.push(snippet);
+                        }
+                    } else {
+                        // 处理其他类型的文件
+                        const snippet = await this.processRegularFile(fullPath);
+                        if (snippet) {
+                            snippets.push(snippet);
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+            console.error(`加载目录 ${directory} 中的片段失败:`, error);
         }
     }
 
@@ -220,12 +249,90 @@ export class SnippetManager {
                 tags: snippetConfig.tags || [],
                 cmd: snippetConfig.cmd || '',
                 createdAt: new Date(snippetConfig.createdAt || stats.birthtime),
-                updatedAt: new Date(stats.mtime)
+                updatedAt: new Date(stats.mtime),
+                extension: 'snip' // 添加扩展名信息
             };
             
             return snippet;
         } catch (error) {
             console.error(`解析 .snip 文件失败: ${filePath}`, error);
+            return null;
+        }
+    }
+
+    /**
+     * 处理常规文件（非 .snip 格式）
+     * 直接读取文件内容并创建片段对象
+     * @param filePath 文件的完整路径
+     * @returns 创建的片段对象，失败返回 null
+     */
+    private async processRegularFile(filePath: string): Promise<Snippet | null> {
+        try {
+            // 读取文件内容
+            const content = await fs.readFile(filePath, 'utf-8');
+            
+            // 获取文件信息
+            const stats = await fs.stat(filePath);
+            const fileName = path.basename(filePath);
+            const fileExt = path.extname(filePath).slice(1); // 去掉扩展名前的点
+            
+            // 根据文件扩展名判断语言
+            let language = 'plaintext';
+            
+            // 常见文件扩展名到语言的映射
+            const langMap: Record<string, string> = {
+                'js': 'javascript',
+                'ts': 'typescript',
+                'jsx': 'javascriptreact',
+                'tsx': 'typescriptreact',
+                'html': 'html',
+                'css': 'css',
+                'scss': 'scss',
+                'sass': 'sass',
+                'less': 'less',
+                'json': 'json',
+                'md': 'markdown',
+                'py': 'python',
+                'java': 'java',
+                'c': 'c',
+                'cpp': 'cpp',
+                'cs': 'csharp',
+                'go': 'go',
+                'php': 'php',
+                'rb': 'ruby',
+                'rs': 'rust',
+                'sh': 'shell',
+                'bat': 'bat',
+                'ps1': 'powershell',
+                'sql': 'sql',
+                'xml': 'xml',
+                'yaml': 'yaml',
+                'yml': 'yaml'
+            };
+            
+            // 根据扩展名获取语言
+            if (fileExt && fileExt in langMap) {
+                language = langMap[fileExt];
+            }
+            
+            // 创建片段对象
+            const snippet: Snippet = {
+                id: this.generateId(),
+                name: fileName,
+                displayName: fileName,
+                description: `File from ${path.relative(this.storageDir, filePath)}`,
+                content: content,
+                language: language,
+                tags: [fileExt], // 使用扩展名作为标签
+                cmd: '',
+                createdAt: new Date(stats.birthtime),
+                updatedAt: new Date(stats.mtime),
+                extension: fileExt // 保存文件扩展名
+            };
+            
+            return snippet;
+        } catch (error) {
+            console.error(`处理文件失败: ${filePath}`, error);
             return null;
         }
     }
