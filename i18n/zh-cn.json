@@ -1,0 +1,42 @@
+{
+    "sniphub.displayName": "SnipHub",
+    "sniphub.description": "代码片段和片段集管理工具",
+    
+    "command.showSnippetManager": "打开片段管理器",
+    "command.createPacks": "SnipHub: 创建片段集",
+    "command.addFileToPacks": "SnipHub: 添加文件到片段集",
+    "command.refreshSnippets": "SnipHub: 刷新片段",
+    "command.openSettings": "配置扩展",
+    "command.createSnippetDropdown": "创建",
+    "command.createSnipFile": "SnipHub: 创建 .snip 文件",
+    "command.createSnipFromSelection": "SnipHub: 从选中内容创建代码片段",
+    "command.applySnippetByName": "SnipHub: 应用指定名称的片段",
+    
+    "view.snippetExplorer": "SnipHub",
+    "viewContainer.title": "SnipHub",
+    "viewWelcome.content": "暂无片段和片段集\n点击上方 ➕ 按钮开始创建",
+    
+    "menu.createSnipFromSelection": "SnipHub: 创建 .snip 文件",
+    
+    "config.storageLocation.description": "片段存储位置",
+    "config.prefix.description": "代码提示前缀",
+    
+    "message.extensionActivated": "SnipHub 扩展已激活",
+    "message.extensionDeactivated": "SnipHub 扩展已停用",
+    "message.fileReadError": "无法读取文件: {0}",
+    "message.snippetsRefreshed": "片段列表已刷新",
+    "message.noActiveEditor": "没有活动的编辑器",
+    "message.snippetNotFound": "找不到名为 \"{0}\" 的片段",
+    "message.snippetApplied": "已应用片段: {0}",
+    
+    "quickPick.selectOperation": "选择要执行的操作",
+    "quickPick.createSnipFile.label": "$(file-code) SnipHub: 创建 .snip 文件",
+    "quickPick.createSnipFile.description": "创建可手动编辑的 .snip 格式文件",
+    "quickPick.createPacks.label": "$(folder) SnipHub: 创建片段集",
+    "quickPick.createPacks.description": "创建一个新的片段集（多文件模板）",
+    "quickPick.showSnippetManager.label": "$(file-text) SnipHub: 打开管理器",
+    "quickPick.showSnippetManager.description": "打开片段管理器查看所有片段",
+    
+    "treeView.snippets": "代码片段",
+    "treeView.packs": "片段集"
+}

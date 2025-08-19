@@ -1,0 +1,42 @@
+{
+    "sniphub.displayName": "SnipHub",
+    "sniphub.description": "Code snippets and snippet sets management tool",
+    
+    "command.showSnippetManager": "Open Snippet Manager",
+    "command.createPacks": "SnipHub: Create Snippet Set",
+    "command.addFileToPacks": "SnipHub: Add File to Snippet Set",
+    "command.refreshSnippets": "SnipHub: Refresh Snippets",
+    "command.openSettings": "Configure Extension",
+    "command.createSnippetDropdown": "Create",
+    "command.createSnipFile": "SnipHub: Create .snip File",
+    "command.createSnipFromSelection": "SnipHub: Create Snippet from Selection",
+    "command.applySnippetByName": "SnipHub: Apply Snippet by Name",
+    
+    "view.snippetExplorer": "SnipHub",
+    "viewContainer.title": "SnipHub",
+    "viewWelcome.content": "No snippets or snippet sets yet\nClick the ➕ button above to get started",
+    
+    "menu.createSnipFromSelection": "SnipHub: Create .snip File",
+    
+    "config.storageLocation.description": "Snippet storage location",
+    "config.prefix.description": "Code completion prefix",
+    
+    "message.extensionActivated": "SnipHub extension has been activated",
+    "message.extensionDeactivated": "SnipHub extension has been deactivated",
+    "message.fileReadError": "Unable to read file: {0}",
+    "message.snippetsRefreshed": "Snippet list has been refreshed",
+    "message.noActiveEditor": "No active editor",
+    "message.snippetNotFound": "Snippet named \"{0}\" not found",
+    "message.snippetApplied": "Applied snippet: {0}",
+    
+    "quickPick.selectOperation": "Select operation to perform",
+    "quickPick.createSnipFile.label": "$(file-code) SnipHub: Create .snip File",
+    "quickPick.createSnipFile.description": "Create a manually editable .snip format file",
+    "quickPick.createPacks.label": "$(folder) SnipHub: Create Snippet Set",
+    "quickPick.createPacks.description": "Create a new snippet set (multi-file template)",
+    "quickPick.showSnippetManager.label": "$(file-text) SnipHub: Open Manager",
+    "quickPick.showSnippetManager.description": "Open snippet manager to view all snippets",
+    
+    "treeView.snippets": "Code Snippets",
+    "treeView.packs": "Snippet Sets"
+}
