@@ -7,18 +7,16 @@ A convenient VS Code extension for code snippet management, allowing you to easi
 
 While current AI code generation tools can meet certain development needs, the generated code often fails to align with project-specific architectural designs and coding standards. To prevent code quality degradation and technical debt accumulation, we developed this project. SnipHub enables development teams to preset standard-compliant code snippet templates within projects, supports on-demand usage, and can be shared with team members through Git repositories, thus achieving standardized code reuse and management.
 
-**🌍 Language:** [English](README.md) | [中文](README.zh-cn.md)
+**🌍 README:** [English](README.md) | [中文](README.zh-cn.md)
 
 ## ✨ Features
 
-- 🔧 **Quick Access**: Access management interface through the sidebar
-- ✂️ **Smart Creation**: Create code snippets from selected text in editor
-- 📁 **Snippet Sets**: Create and manage multi-file templates
+- ✂️ **Quick Creation**: Create code snippets from selected text in editor
 - 🎯 **Context Menu**: Right-click menu for quick operations
 - 📂 **Auto Organization**: Automatically categorize and store in `.vscode/SnipHub`
+- 🔧 **Quick Application**: Apply snippets quickly with customizable prefix via code completion
 - 🏷️ **Rich Metadata**: Support for tags and descriptions
 - 🌍 **Multilingual**: Support for multiple languages (English, Chinese)
-- 🔍 **IntelliSense**: Code completion with customizable prefix
 - 📝 **Syntax Highlighting**: Built-in syntax highlighting for .snip files
 
 ## 🚀 Getting Started
@@ -55,100 +53,46 @@ While current AI code generation tools can meet certain development needs, the g
 
 ### Code Snippets
 
-Code snippets are reusable code blocks stored in `.snip` files. They support:
+Support for direct code completion of development language code file content to the target position, or you can use the custom format `.snip` file for code snippets:
 
+- **Code-Configuration Separation**: `set` tag for snippet configuration, `code` tag for code snippet
 - **Multiple Languages**: Automatic language detection
-- **Variable Placeholders**: VS Code snippet syntax support
-- **Rich Metadata**: Name, description, tags, and more
-- **IntelliSense Integration**: Trigger with customizable prefix
+- **Custom Completion Names**: Trigger with customizable snippet names
+- **Rich Configuration Options**: Name, description, tags, and more
 
-Example `.snip` file:
+**Supported Custom Options**
 
-**Code Snippet Type:**
+| Option | Required | Description |
+|:------|:------:|:------|
+|name|Yes|Snippet name|
+|displayName|No|Snippet display name|
+|description|No|Snippet description|
+|language|No|Code language|
+|tags|No|Code tags|
+|updatedAt|No|Update time|
+
+More coming soon...
+
+**Example `.snip` file:**
+
 ```snip
 <set>
 {
-  "name": "react-component",
-  "displayName": "React Functional Component",
-  "description": "Creates a basic React functional component",
+  "name": "hello-world",
+  "displayName": "Hello World",
+  "description": "Create a simple Hello World JavaScript code",
   "language": "javascript",
-  "tags": ["react", "component", "jsx"]
+  "tags": ["javascript", "basic", "example"]
 }
 </set>
 <code language="javascript">
-import React from 'react';
-
-const ${1:ComponentName} = () => {
-  return (
-    <div>
-      ${2:// Component content}
-    </div>
-  );
-};
-
-export default ${1:ComponentName};
+function sayHello() {
+  console.log("Hello, World!");
+  return "Hello, World!";
+}
+sayHello();
 </code>
 ```
-
-**Snippet Set Type:**
-```snip
-<set>
-{
-  "name": "react-project-template",
-  "displayName": "React Project Template",
-  "description": "Complete React project structure with components and styles",
-  "tags": ["react", "template", "project"]
-}
-</set>
-<code language="javascript" path="src/App.js">
-import React from 'react';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <h1>${1:App Title}</h1>
-    </div>
-  );
-}
-
-export default App;
-</code>
-<code language="css" path="src/App.css">
-.App {
-  text-align: center;
-  padding: 20px;
-}
-
-h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-</code>
-<code language="json" path="package.json">
-{
-  "name": "${1:project-name}",
-  "version": "1.0.0",
-  "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
-  }
-}
-</code>
-```
-
-### Snippet Sets
-
-Snippet sets are collections of files that work together as templates. Perfect for:
-
-- **Project Templates**: Complete project structures
-- **Component Libraries**: Related components and styles
-- **Configuration Sets**: Multiple config files
-- **Documentation Templates**: README, docs, and guides
 
 ## ⚙️ Configuration
 
@@ -208,10 +152,9 @@ The extension automatically detects your VS Code language setting and displays t
 ```
 .vscode/SnipHub/
 ├── snip/              # Individual code snippets (.snip files)
-├── packs/             # Snippet sets (folders with multiple files)
-└── config/            # Configuration files
+└── packs/             # Snippet sets (snippet collection configuration files)
 ```
-##  Links
+## 🔗 Links
 
 - [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=sniphub)
 - [GitHub Repository](https://github.com/dao404/sniphub)
@@ -219,11 +162,12 @@ The extension automatically detects your VS Code language setting and displays t
 - [Documentation](https://github.com/dao404/sniphub/wiki)
 
 
-## Future Development Plans
+## 📁 Future Development Plans
 
 - Support for snippet set applications composed of multiple snippets, including application configuration and command execution
 - MCP Server to provide project snippet resources for AI tools
 - Public code snippet distribution
+- Welcome to provide development suggestions through issues
 
 ## 🤝 Contributing
 
