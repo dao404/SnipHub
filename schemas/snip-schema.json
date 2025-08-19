@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SnipHub File Schema",
+  "description": "Schema for SnipHub .snip files with <set> and <code> tags format",
+  "type": "string",
+  "pattern": "^\\s*<set>[\\s\\S]*?</set>[\\s\\S]*<code[\\s\\S]*?>[\\s\\S]*?</code>[\\s\\S]*$"
+}

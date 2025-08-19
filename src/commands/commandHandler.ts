@@ -1,0 +1,139 @@
+import * as vscode from 'vscode';
+import { SnippetManager } from '../core/snippetManager';
+import { SnippetWebviewProvider } from '../views/webviewProvider';
+import { FileSnipHandler } from '../handlers/fileSnipHandler';
+import { Snippet } from '../types';
+import { t } from '../utils/i18n';
+
+/**
+ * 命令处理器类
+ * 包含所有命令的具体实现逻辑
+ */
+export class CommandHandler {
+    constructor(
+        private context: vscode.ExtensionContext,
+        private snippetManager: SnippetManager,
+        private webviewProvider: SnippetWebviewProvider,
+        private fileSnipHandler: FileSnipHandler
+    ) {}
+
+    /**
+     * 显示片段管理器
+     */
+    showSnippetManager() {
+        this.webviewProvider.showSnippetManager();
+    }
+
+    /**
+     * 创建片段集
+     */
+    createPacks() {
+        this.webviewProvider.showCreatePacks();
+    }
+
+    /**
+     * 添加文件到片段集
+     */
+    async addFileToPacks(uri: vscode.Uri) {
+        try {
+            // 读取文件内容
+            const document = await vscode.workspace.openTextDocument(uri);
+            const content = document.getText();
+            // 提取文件名
+            const fileName = uri.fsPath.split('\\').pop() || uri.fsPath.split('/').pop() || 'unknown';
+            
+            // 打开添加文件到片段集的界面
+            this.webviewProvider.showAddFileToPacks(content, fileName, document.languageId);
+        } catch (error) {
+            vscode.window.showErrorMessage(t('message.fileReadError', error));
+        }
+    }
+
+    /**
+     * 刷新片段列表
+     */
+    refreshSnippets() {
+        // 通过事件通知刷新，避免直接依赖 SnippetExplorerProvider
+        vscode.commands.executeCommand('sniphub.internal.refresh');
+        vscode.window.showInformationMessage(t('message.snippetsRefreshed'));
+    }
+
+    /**
+     * 打开扩展设置
+     */
+    openSettings() {
+        vscode.commands.executeCommand('workbench.action.openSettings', 'sniphub');
+    }
+
+    /**
+     * 应用指定名称的片段
+     */
+    async applySnippetByName(snippetName: string) {
+        const snippets = await this.snippetManager.loadAllSnippets();
+        const snippet = snippets.find((s: Snippet) => s.name === snippetName);
+        
+        if (snippet) {
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const position = editor.selection.active;
+                await editor.edit(editBuilder => {
+                    editBuilder.insert(position, snippet.content);
+                });
+                vscode.window.showInformationMessage(t('message.snippetApplied', snippet.name));
+            } else {
+                vscode.window.showErrorMessage(t('message.noActiveEditor'));
+            }
+        } else {
+            vscode.window.showErrorMessage(t('message.snippetNotFound', snippetName));
+        }
+    }
+
+    /**
+     * 创建 .snip 文件
+     */
+    async createSnipFile() {
+        await this.fileSnipHandler.createExampleSnipFile();
+    }
+
+    /**
+     * 从选中内容创建 .snip 文件
+     */
+    async createSnipFromSelection() {
+        await this.fileSnipHandler.createSnipFromSelection();
+    }
+
+    /**
+     * 创建下拉菜单
+     */
+    async createSnippetDropdown() {
+        // 定义下拉菜单选项
+        const options = [
+            {
+                label: t('quickPick.createSnipFile.label'),
+                description: t('quickPick.createSnipFile.description'),
+                command: 'sniphub.createSnipFile'
+            },
+            {
+                label: t('quickPick.createPacks.label'),
+                description: t('quickPick.createPacks.description'),
+                command: 'sniphub.createPacks'
+            },
+            // {
+            //     label: t('quickPick.showSnippetManager.label'),
+            //     description: t('quickPick.showSnippetManager.description'),
+            //     command: 'sniphub.showSnippetManager'
+            // }
+        ];
+
+        // 显示快速选择菜单
+        const selected = await vscode.window.showQuickPick(options, {
+            placeHolder: t('quickPick.selectOperation'),
+            matchOnDescription: true  // 允许通过描述文本进行搜索
+        });
+
+        // 执行选中的命令
+        if (selected) {
+            vscode.commands.executeCommand(selected.command);
+        }
+    }
+}

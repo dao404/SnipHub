@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "组件名称"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["javascript", "typescript", "go", "python", "java"],
+      "description": "目标语言类型"
+    },
+    "targetPath": {
+      "type": "string",
+      "description": "生成文件的路径模板"
+    },
+    "variables": {
+      "type": "object",
+      "patternProperties": {
+        "^.*$": {
+          "type": "object",
+          "properties": {
+            "default": { "type": "string" },
+            "transform": {
+              "type": "string",
+              "enum": ["camelCase", "pascalCase", "kebabCase", "snakeCase"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["name", "language"]
+}

@@ -1,0 +1,84 @@
+{
+  "scopeName": "text.snip",
+  "injectionSelector": "L:text.snip",
+  "patterns": [
+    {
+      "begin": "(<)(code)\\s+language=([\"'])([^\\\"']+)\\3(>)",
+      "end": "(</)(code)(>)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.snip" },
+        "2": { "name": "entity.name.tag.snip" },
+        "3": { "name": "punctuation.definition.attribute.snip" },
+        "4": { "name": "meta.language-identifier.snip" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.snip" },
+        "2": { "name": "entity.name.tag.snip" }
+      },
+      "contentName": "meta.embedded.block.code",
+      "patterns": [
+        {
+          "include": "source.ts",
+          "when": "[[match:4 == 'typescript' || match:4 == 'ts']]"
+        },
+        {
+          "include": "source.js",
+          "when": "[[match:4 == 'javascript' || match:4 == 'js']]"
+        },
+        {
+          "include": "source.python",
+          "when": "[[match:4 == 'python' || match:4 == 'py']]"
+        },
+        {
+          "include": "source.go",
+          "when": "[[match:4 == 'go']]"
+        },
+        {
+          "include": "source.cpp",
+          "when": "[[match:4 == 'cpp' || match:4 == 'cc']]"
+        },
+        {
+          "include": "source.ruby",
+          "when": "[[match:4 == 'ruby' || match:4 == 'rb']]"
+        },
+        {
+          "include": "source.yaml",
+          "when": "[[match:4 == 'yaml' || match:4 == 'yml']]"
+        },
+        {
+          "include": "source.shell",
+          "when": "[[match:4 == 'shell' || match:4 == 'sh']]"
+        }
+      ]
+    },
+    {
+      "begin": "(<)(set)(>)",
+      "end": "(</)(set)(>)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.snip" },
+        "2": { "name": "entity.name.tag.snip" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.snip" },
+        "2": { "name": "entity.name.tag.snip" }
+      },
+      "contentName": "meta.embedded.set.snip",
+      "patterns": [
+        { "include": "source.json" }
+      ]
+    }
+  ],
+  "repository": {
+    "set-language-context": {
+      "patterns": [{
+        "match": "(?<=<set>[\\s\\S]*?\\\"language\\\"\\s*:\\s*\\\")(\\w+)(?=\\\"[\\s\\S]*?</set>)",
+        "captures": {
+          "1": {
+            "name": "meta.language-identifier.snip",
+            "patterns": [{ "include": "$self" }]
+          }
+        }
+      }]
+    }
+  }
+}

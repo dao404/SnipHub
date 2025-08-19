@@ -1,0 +1,182 @@
+{
+  "name": "sniphub",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "snippets",
+    "code management",
+    "templates"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sniphub.showSnippetManager",
+        "title": "%command.showSnippetManager.title%",
+        "category": "SnipHub"
+      },
+      {
+        "command": "sniphub.createPacks",
+        "title": "%command.createPacks.title%",
+        "category": "SnipHub"
+      },
+      {
+        "command": "sniphub.addFileToPacks",
+        "title": "%command.addFileToPacks.title%",
+        "category": "SnipHub"
+      },
+      {
+        "command": "sniphub.refreshSnippets",
+        "title": "%command.refreshSnippets.title%",
+        "category": "SnipHub",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "sniphub.openSettings",
+        "title": "%command.openSettings.title%",
+        "category": "SnipHub",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "sniphub.createSnippetDropdown",
+        "title": "%command.createSnippetDropdown.title%",
+        "category": "SnipHub",
+        "icon": "$(add)"
+      },
+      {
+        "command": "sniphub.createSnipFile",
+        "title": "%command.createSnipFile.title%",
+        "category": "SnipHub"
+      },
+      {
+        "command": "sniphub.createSnipFromSelection",
+        "title": "%command.createSnipFromSelection.title%",
+        "category": "SnipHub"
+      },
+      {
+        "command": "sniphub.applySnippetByName",
+        "title": "%command.applySnippetByName.title%",
+        "category": "SnipHub"
+      }
+    ],
+    "views": {
+      "sniphub": [
+        {
+          "id": "sniphub.snippetExplorer",
+          "name": "%view.snippetExplorer.name%",
+          "when": "true"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sniphub",
+          "title": "%viewContainer.title%",
+          "icon": "icons/activity-bar.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "sniphub.snippetExplorer",
+        "contents": "%viewWelcome.contents%"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "sniphub.createSnipFromSelection",
+          "when": "editorHasSelection",
+          "group": "sniphub",
+          "title": "%menu.createSnipFromSelection.title%"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "sniphub.addFileToPacks",
+          "when": "!explorerResourceIsFolder",
+          "group": "sniphub"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "sniphub.refreshSnippets",
+          "when": "view == sniphub.snippetExplorer",
+          "group": "navigation@2"
+        },
+        {
+          "command": "sniphub.createSnippetDropdown",
+          "when": "view == sniphub.snippetExplorer",
+          "group": "navigation@1"
+        },
+        {
+          "command": "sniphub.openSettings",
+          "when": "view == sniphub.snippetExplorer",
+          "group": "navigation@3"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "sniphub.createSnippetDropdown",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "%configuration.title%",
+      "properties": {
+        "sniphub.storageLocation": {
+          "type": "string",
+          "default": ".vscode/SnipHub",
+          "description": "%configuration.storageLocation.description%"
+        },
+        "sniphub.prefix": {
+          "type": "string",
+          "default": "sh",
+          "description": "%configuration.prefix.description%"
+        }
+      }
+    },
+    "languages": [{
+      "id": "snip",
+      "aliases": ["Snippet Template"],
+      "extensions": [".snip"],
+      "configuration": "./snip-language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "snip",
+      "scopeName": "text.snip",
+      "path": "./syntaxes/snip.tmLanguage.json"
+    }],
+    "jsonValidation": [{
+      "fileMatch": "*.snip",
+      "url": "./schemas/snip-schema.json"
+    }]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  }
+}
