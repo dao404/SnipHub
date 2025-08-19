@@ -10,7 +10,6 @@
     "command.createSnippetDropdown": "Create",
     "command.createSnipFile": "SnipHub: Create .snip File",
     "command.createSnipFromSelection": "SnipHub: Create Snippet from Selection",
-    "command.applySnippetByName": "SnipHub: Apply Snippet by Name",
     
     "view.snippetExplorer": "SnipHub",
     "viewContainer.title": "SnipHub",

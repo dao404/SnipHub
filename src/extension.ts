@@ -10,7 +10,6 @@ import { SnippetWebviewProvider } from './views/webviewProvider';
 
 // 导入处理器模块
 import { FileSnipHandler } from './handlers/fileSnipHandler';
-import { InlineCompletionHandler } from './handlers/inlineCompletionHandler';
 import { FileWatcherHandler } from './handlers/fileWatcherHandler';
 import { SnippetCompletionHandler } from './handlers/snippetCompletionHandler';
 
@@ -49,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // 初始化处理器组件
     const fileSnipHandler = new FileSnipHandler(context, snippetManager.getStorageDirectoryPath());
-    const inlineCompletionHandler = new InlineCompletionHandler(snippetManager);
+
     const fileWatcherHandler = new FileWatcherHandler(snippetManager);
     const snippetCompletionHandler = new SnippetCompletionHandler(snippetManager);
 
@@ -63,7 +62,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // 注册所有组件
     registerCommands(context, commandHandler);
-    inlineCompletionHandler.register(context);
+
     fileWatcherHandler.register(context);
     snippetCompletionHandler.register(context);
     SemanticTokensProvider.register(context);
@@ -81,14 +80,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
     context.subscriptions.push(configChangeListener);
-
-    // // 注册片段插入后的命令处理器
-    // context.subscriptions.push(
-    //     vscode.commands.registerCommand('sniphub.onSnippetInserted', (content: string) => {
-    //         console.log('片段已插入:', content);
-    //         // 在这里添加其他处理逻辑
-    //     })
-    // );
 }
 
 /**

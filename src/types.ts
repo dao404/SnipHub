@@ -9,7 +9,7 @@
  */
 export interface Snippet {
     /** 唯一标识符 */
-    id: string;
+    id?: string;
     /** 片段名称 */
     name: string;
     /** 片段显示名称 */
@@ -21,17 +21,18 @@ export interface Snippet {
     /** 编程语言 */
     language: string;
     /** 标签数组，用于分类和搜索 */
-    tags: string[];
+    tags?: string[];
     /** 触发前缀，用于代码补全 */
     cmd?: string;
     /** 创建时间 */
     createdAt: Date;
     /** 最后更新时间 */
     updatedAt: Date;
-    /** 文件扩展名 */
-    extension?: string;
     /** 原始文件路径，用于直接打开文件 */
-    filePath?: string;
+    filePath: string;
+    /** 文件扩展名 */
+    extension: string;
+    
 }
 
 /**

@@ -65,8 +65,8 @@
         "category": "SnipHub"
       },
       {
-        "command": "sniphub.applySnippetByName",
-        "title": "%command.applySnippetByName.title%",
+        "command": "sniphub.applySnippet",
+        "title": "%command.applySnippet.title%",
         "category": "SnipHub"
       }
     ],

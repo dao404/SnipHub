@@ -68,29 +68,6 @@ export class CommandHandler {
     }
 
     /**
-     * 应用指定名称的片段
-     */
-    async applySnippetByName(snippetName: string) {
-        const snippets = await this.snippetManager.loadAllSnippets();
-        const snippet = snippets.find((s: Snippet) => s.name === snippetName);
-        
-        if (snippet) {
-            const editor = vscode.window.activeTextEditor;
-            if (editor) {
-                const position = editor.selection.active;
-                await editor.edit(editBuilder => {
-                    editBuilder.insert(position, snippet.content);
-                });
-                vscode.window.showInformationMessage(t('message.snippetApplied', snippet.name));
-            } else {
-                vscode.window.showErrorMessage(t('message.noActiveEditor'));
-            }
-        } else {
-            vscode.window.showErrorMessage(t('message.snippetNotFound', snippetName));
-        }
-    }
-
-    /**
      * 创建 .snip 文件
      */
     async createSnipFile() {
@@ -165,4 +142,51 @@ export class CommandHandler {
             vscode.window.showErrorMessage(t('message.fileOpenError', error));
         }
     }
+
+    /**
+     * 应用片段
+     * 直接将片段内容插入到当前编辑器
+     */
+    async applySnippet(snippet: Snippet) {
+        if (!snippet || !snippet.content) {
+            vscode.window.showErrorMessage(t('message.invalidSnippet'));
+            return;
+        }
+
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            vscode.window.showErrorMessage(t('message.noActiveEditor'));
+            return;
+        }
+
+        const position = editor.selection.active;
+        const line = editor.document.lineAt(position.line);
+        const lineText = line.text;
+        
+        const prefix = vscode.workspace.getConfiguration('sniphub').get<string>('prefix', 'sh');
+
+        const index = lineText.lastIndexOf(prefix + ':', position.character);
+        console.log(`Line text: ${lineText}, Position: ${position.line}:${position.character}, Index: ${index}`);
+
+        // 找到前缀，需要替换前缀以及后续的命令
+        const prefixEnd = lineText.indexOf(' ', index);
+        const endPos = prefixEnd !== -1 ? prefixEnd : position.character;
+        
+        // 创建需要替换的范围
+        const replaceStart = new vscode.Position(position.line, index);
+        const replaceEnd = new vscode.Position(position.line, endPos);
+        const range = new vscode.Range(replaceStart, replaceEnd);
+        
+        try {
+            // 否则使用片段内容
+            await editor.edit(editBuilder => {
+                editBuilder.replace(range, ''); // 先删除前缀
+            });
+            await editor.insertSnippet(new vscode.SnippetString(snippet.content), replaceStart);
+        } catch (error) {
+            console.error('Error applying snippet:', error);
+            vscode.window.showErrorMessage(t('message.snippetApplyError', error));
+        }
+    }
+
 }

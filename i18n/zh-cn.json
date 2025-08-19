@@ -10,7 +10,6 @@
     "command.createSnippetDropdown": "创建",
     "command.createSnipFile": "SnipHub: 创建 .snip 文件",
     "command.createSnipFromSelection": "SnipHub: 从选中内容创建代码片段",
-    "command.applySnippetByName": "SnipHub: 应用指定名称的片段",
     
     "view.snippetExplorer": "SnipHub",
     "viewContainer.title": "SnipHub",

@@ -10,7 +10,7 @@
     "command.createSnippetDropdown.title": "创建",
     "command.createSnipFile.title": "创建 .snip 文件",
     "command.createSnipFromSelection.title": "从选中内容创建代码片段",
-    "command.applySnippetByName.title": "应用指定名称的片段",
+    "command.applySnippet.title": "应用片段",
     
     "view.snippetExplorer.name": "SnipHub",
     "viewContainer.title": "SnipHub",

@@ -214,7 +214,6 @@ export class SnippetManager {
             // 解析 <code> 和 <set> 标签，支持从 <code> 的 language 属性解析语言
             const codeMatch = content.match(/<code(?:\s+language=["']([^"']+)["'])?[^>]*>([\s\S]*?)<\/code>/);
             const setMatch = content.match(/<set[^>]*>([\s\S]*?)<\/set>/);
-            console.log(`codeMatch0: ${codeMatch ? codeMatch[0] : 'null'}, codeMatch1: ${codeMatch ? codeMatch[1] : 'null'}, codeMatch2: ${codeMatch ? codeMatch[2] : 'null'}`);
             if (!codeMatch || !setMatch) {
                 console.warn(`文件 ${filePath} 格式不正确，缺少 <code> 或 <set> 标签`);
                 return null;

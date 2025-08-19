@@ -10,8 +10,8 @@
     "command.createSnippetDropdown.title": "Create",
     "command.createSnipFile.title": "Create .snip File",
     "command.createSnipFromSelection.title": "Create Snippet from Selection",
-    "command.applySnippetByName.title": "Apply Snippet by Name",
-    
+    "command.applySnippet.title": "Apply Snippet",
+
     "view.snippetExplorer.name": "SnipHub",
     "viewContainer.title": "SnipHub",
     "viewWelcome.contents": "No snippets or snippet sets yet\nClick the ➕ button above to get started",

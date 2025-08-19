@@ -16,14 +16,14 @@ export function registerCommands(
         }),
 
         // 创建片段集 - 打开创建片段集的表单
-        vscode.commands.registerCommand('sniphub.createPacks', () => {
-            commandHandler.createPacks();
-        }),
+        // vscode.commands.registerCommand('sniphub.createPacks', () => {
+        //     commandHandler.createPacks();
+        // }),
 
         // 添加文件到片段集 - 资源管理器右键菜单功能
-        vscode.commands.registerCommand('sniphub.addFileToPacks', async (uri: vscode.Uri) => {
-            await commandHandler.addFileToPacks(uri);
-        }),
+        // vscode.commands.registerCommand('sniphub.addFileToPacks', async (uri: vscode.Uri) => {
+        //     await commandHandler.addFileToPacks(uri);
+        // }),
 
         // 刷新片段列表 - 重新加载所有片段数据
         vscode.commands.registerCommand('sniphub.refreshSnippets', () => {
@@ -34,12 +34,7 @@ export function registerCommands(
         vscode.commands.registerCommand('sniphub.openSettings', () => {
             commandHandler.openSettings();
         }),
-
-        // sh: 前缀片段应用命令 - 支持通过 sh:片段名 快速应用片段
-        vscode.commands.registerCommand('sniphub.applySnippetByName', async (snippetName: string) => {
-            await commandHandler.applySnippetByName(snippetName);
-        }),
-
+        
         // 创建 .snip 文件 - 支持用户手动创建 .snip 格式的片段文件
         vscode.commands.registerCommand('sniphub.createSnipFile', async () => {
             await commandHandler.createSnipFile();
@@ -58,6 +53,10 @@ export function registerCommands(
         // 在工作区中直接打开文件 - 从片段浏览器中直接打开文件
         vscode.commands.registerCommand('sniphub.openFileInWorkspace', async (snippet: any) => {
             await commandHandler.openFileInWorkspace(snippet);
+        }),
+
+        vscode.commands.registerCommand('sniphub.applySnippet', async (snippet: any) => {
+            await commandHandler.applySnippet(snippet);
         })
     ];
 

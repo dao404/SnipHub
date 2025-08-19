@@ -107,6 +107,8 @@ export class SnippetWebviewProvider {
                 language: data.language,
                 tags: data.tags || [],
                 cmd: data.cmd,
+                filePath: data.filePath || '',
+                extension: data.extension || '',
                 createdAt: new Date(),
                 updatedAt: new Date()
             };

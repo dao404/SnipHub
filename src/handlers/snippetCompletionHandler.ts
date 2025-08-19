@@ -18,7 +18,6 @@ export class SnippetCompletionHandler {
             { pattern: '**' }, // 支持所有文件类型
             {
                 provideCompletionItems: this.provideCompletionItems.bind(this),
-                resolveCompletionItem: this.resolveCompletionItem.bind(this) // 添加这一行
             },
             ':' // 触发字符
         );
@@ -71,7 +70,7 @@ export class SnippetCompletionHandler {
             snippet.name.toLowerCase().includes(search) ||
             snippet.displayName.toLowerCase().includes(search) ||
             snippet.description.toLowerCase().includes(search) ||
-            snippet.tags.some(tag => tag.toLowerCase().includes(search))
+            (snippet.tags?.some(tag => tag.toLowerCase().includes(search) || tag === search) ?? false)
         );
     }
 
@@ -87,40 +86,15 @@ export class SnippetCompletionHandler {
             .appendMarkdown('\n\n---\n\n')
             .appendCodeblock(snippet.content, snippet.language);
         
-        if (snippet.tags.length) {
+        if (snippet.tags && snippet.tags.length) {
             item.documentation.appendMarkdown(`\n\ntags: ${snippet.tags.join(', ')}`);
         }
 
-        // 设置补全文本，替换包括前缀的整个输入
-        item.insertText = snippet.content;
-        item.range = new vscode.Range(
-            new vscode.Position(0, 0),
-            new vscode.Position(0, prefix.length + snippet.name.length)
-        );
         item.command = {
-            command: 'sniphub.importSnippet',
-            title: 'Import Snippet',
+            command: 'sniphub.applySnippet',
+            title: 'Apply Snippet',
             arguments: [snippet] // 传递片段内容作为参数
         };
-        console.log(`item: ${JSON.stringify(item)}`);
-        return item;
-    }
-
-    private async resolveCompletionItem(
-        item: vscode.CompletionItem,
-        token: vscode.CancellationToken
-    ): Promise<vscode.CompletionItem> {
-        console.log(`Resolving completion item: ${item}`);
-        // 添加选中后的处理逻辑
-        item.command = {
-            command: 'sniphub.onSnippetInserted', // 自定义命令
-            title: 'Snippet Inserted',
-            arguments: [item.insertText] // 传递参数给命令处理器
-        };
-
-        // 可以在这里添加更多的处理逻辑
-        // 比如更新使用统计、添加最近使用记录等
-
         return item;
     }
 }
