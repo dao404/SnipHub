@@ -28,6 +28,9 @@
     "message.noActiveEditor": "没有活动的编辑器",
     "message.snippetNotFound": "找不到名为 \"{0}\" 的片段",
     "message.snippetApplied": "已应用片段: {0}",
+    "message.cannotDetermineFilePath": "无法确定片段的文件路径: {0}",
+    "message.fileOpenError": "打开文件时出错: {0}",
+    "message.fileNotExists": "文件不存在: {0}",
     
     "quickPick.selectOperation": "选择要执行的操作",
     "quickPick.createSnipFile.label": "$(file-code) SnipHub: 创建 .snip 文件",

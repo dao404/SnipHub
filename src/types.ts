@@ -30,6 +30,8 @@ export interface Snippet {
     updatedAt: Date;
     /** 文件扩展名 */
     extension?: string;
+    /** 原始文件路径，用于直接打开文件 */
+    filePath?: string;
 }
 
 /**

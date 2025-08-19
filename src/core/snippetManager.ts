@@ -250,7 +250,8 @@ export class SnippetManager {
                 cmd: snippetConfig.cmd || '',
                 createdAt: new Date(snippetConfig.createdAt || stats.birthtime),
                 updatedAt: new Date(stats.mtime),
-                extension: 'snip' // 添加扩展名信息
+                extension: 'snip', // 添加扩展名信息
+                filePath: filePath // 保存原始文件路径
             };
             
             return snippet;
@@ -327,7 +328,8 @@ export class SnippetManager {
                 cmd: '',
                 createdAt: new Date(stats.birthtime),
                 updatedAt: new Date(stats.mtime),
-                extension: fileExt // 保存文件扩展名
+                extension: fileExt, // 保存文件扩展名
+                filePath: filePath // 保存原始文件路径
             };
             
             return snippet;

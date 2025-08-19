@@ -1,0 +1,24 @@
+{
+    "displayName": "SnipHub",
+    "description": "Code snippets and snippet sets management tool",
+    
+    "command.showSnippetManager.title": "Open Snippet Manager",
+    "command.createPacks.title": "Create Snippet Set",
+    "command.addFileToPacks.title": "Add File to Snippet Set",
+    "command.refreshSnippets.title": "Refresh Snippets",
+    "command.openSettings.title": "Configure Extension",
+    "command.createSnippetDropdown.title": "Create",
+    "command.createSnipFile.title": "Create .snip File",
+    "command.createSnipFromSelection.title": "Create Snippet from Selection",
+    "command.applySnippetByName.title": "Apply Snippet by Name",
+    
+    "view.snippetExplorer.name": "SnipHub",
+    "viewContainer.title": "SnipHub",
+    "viewWelcome.contents": "No snippets or snippet sets yet\nClick the ➕ button above to get started",
+    
+    "menu.createSnipFromSelection.title": "SnipHub: Create .snip File",
+    
+    "configuration.title": "SnipHub",
+    "configuration.storageLocation.description": "Snippet storage location",
+    "configuration.prefix.description": "Code completion prefix"
+}

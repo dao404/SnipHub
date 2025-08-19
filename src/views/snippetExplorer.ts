@@ -143,13 +143,20 @@ export class SnippetTreeItem extends vscode.TreeItem {
         this.iconPath = this.getIcon();          // 项目图标
         this.contextValue = contextValue;        // 上下文值，用于右键菜单等
 
-        // 为片段和片段集添加点击命令
-        // 当用户点击这些项目时，会打开片段管理器
-        if (contextValue === 'snippet-item' || contextValue === 'packs-item') {
+        // 设置点击行为
+        if (contextValue === 'snippet-item') {
+            // 对于片段项目：直接在工作区打开文件
+            this.command = {
+                command: 'sniphub.openFileInWorkspace',  // 要执行的命令ID
+                title: '在工作区打开',                     // 命令标题
+                arguments: [this.data]                   // 传递给命令的参数
+            };
+        } else if (contextValue === 'packs-item') {
+            // 对于片段集：仍然使用片段管理器
             this.command = {
                 command: 'sniphub.showSnippetManager',  // 要执行的命令ID
-                title: '查看详情',                          // 命令标题
-                arguments: [this.data]                     // 传递给命令的参数
+                title: '查看详情',                       // 命令标题
+                arguments: [this.data]                  // 传递给命令的参数
             };
         }
     }

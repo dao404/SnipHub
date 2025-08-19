@@ -53,6 +53,11 @@ export function registerCommands(
         // 创建下拉菜单 - 顶部工具栏的主要入口
         vscode.commands.registerCommand('sniphub.createSnippetDropdown', async () => {
             await commandHandler.createSnippetDropdown();
+        }),
+
+        // 在工作区中直接打开文件 - 从片段浏览器中直接打开文件
+        vscode.commands.registerCommand('sniphub.openFileInWorkspace', async (snippet: any) => {
+            await commandHandler.openFileInWorkspace(snippet);
         })
     ];
 

@@ -1,0 +1,24 @@
+{
+    "displayName": "SnipHub",
+    "description": "代码片段和片段集管理工具",
+    
+    "command.showSnippetManager.title": "打开片段管理器",
+    "command.createPacks.title": "创建片段集",
+    "command.addFileToPacks.title": "添加文件到片段集",
+    "command.refreshSnippets.title": "刷新片段",
+    "command.openSettings.title": "配置扩展",
+    "command.createSnippetDropdown.title": "创建",
+    "command.createSnipFile.title": "创建 .snip 文件",
+    "command.createSnipFromSelection.title": "从选中内容创建代码片段",
+    "command.applySnippetByName.title": "应用指定名称的片段",
+    
+    "view.snippetExplorer.name": "SnipHub",
+    "viewContainer.title": "SnipHub",
+    "viewWelcome.contents": "暂无片段和片段集\n点击上方 ➕ 按钮开始创建",
+    
+    "menu.createSnipFromSelection.title": "SnipHub: 创建 .snip 文件",
+    
+    "configuration.title": "SnipHub",
+    "configuration.storageLocation.description": "片段存储位置",
+    "configuration.prefix.description": "代码提示前缀"
+}

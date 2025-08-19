@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs-extra';
 import { SnippetManager } from '../core/snippetManager';
 import { SnippetWebviewProvider } from '../views/webviewProvider';
 import { FileSnipHandler } from '../handlers/fileSnipHandler';
@@ -134,6 +136,33 @@ export class CommandHandler {
         // 执行选中的命令
         if (selected) {
             vscode.commands.executeCommand(selected.command);
+        }
+    }
+
+    /**
+     * 在工作区中打开文件
+     * 根据片段信息中的文件路径直接打开原始文件
+     */
+    async openFileInWorkspace(snippet: Snippet) {
+        try {
+            if (!snippet.filePath) {
+                vscode.window.showErrorMessage(t('message.cannotDetermineFilePath', snippet.name));
+                return;
+            }
+
+            // 检查文件是否存在
+            if (!await fs.pathExists(snippet.filePath)) {
+                vscode.window.showErrorMessage(t('message.fileNotExists', snippet.filePath));
+                return;
+            }
+
+            // 尝试打开文件
+            const uri = vscode.Uri.file(snippet.filePath);
+            const document = await vscode.workspace.openTextDocument(uri);
+            await vscode.window.showTextDocument(document);
+        } catch (error) {
+            console.error('Error opening file:', error);
+            vscode.window.showErrorMessage(t('message.fileOpenError', error));
         }
     }
 }

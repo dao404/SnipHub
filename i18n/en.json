@@ -28,6 +28,9 @@
     "message.noActiveEditor": "No active editor",
     "message.snippetNotFound": "Snippet named \"{0}\" not found",
     "message.snippetApplied": "Applied snippet: {0}",
+    "message.cannotDetermineFilePath": "Cannot determine file path for snippet: {0}",
+    "message.fileOpenError": "Error opening file: {0}",
+    "message.fileNotExists": "File does not exist: {0}",
     
     "quickPick.selectOperation": "Select operation to perform",
     "quickPick.createSnipFile.label": "$(file-code) SnipHub: Create .snip File",
