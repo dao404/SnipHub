@@ -1,0 +1,16 @@
+{
+  "name": "sniphub-test-project",
+  "version": "1.0.0",
+  "description": "用于测试 SnipHub VS Code 扩展的示例项目",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "echo \"这是一个示例项目，用于测试 SnipHub 扩展\" && exit 0"
+  },
+  "keywords": [
+    "sniphub",
+    "test",
+    "snippets"
+  ],
+  "author": "SnipHub 用户",
+  "license": "MIT"
+}

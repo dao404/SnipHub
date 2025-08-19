@@ -1,0 +1,51 @@
+<set>
+{
+  "name": "React 函数组件",
+  "description": "创建一个 React 函数组件，支持多种导入和导出选项",
+  "language": "javascriptreact",
+  "prefix": "sh.react.component"
+}
+</set>
+<code lang="javascriptreact">
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+/**
+ * 组件描述
+ * @param {Object} props - 组件属性
+ * @returns {JSX.Element} React 组件
+ */
+const ComponentName = (props) => {
+  // 状态定义
+  const [state, setState] = useState(初始值);
+  
+  // 副作用
+  useEffect(() => {
+    // 组件挂载时执行
+    // 在此处添加副作用代码
+    
+    return () => {
+      // 组件卸载时执行
+      // 在此处添加清理代码
+    };
+  }, [/* 依赖项 */]);
+
+  return (
+    <div className="container">
+      // 组件内容
+    </div>
+  );
+};
+
+// PropTypes 定义
+ComponentName.propTypes = {
+  // 在此处添加属性类型定义
+};
+
+// 默认属性
+ComponentName.defaultProps = {
+  // 在此处添加默认属性
+};
+
+export default ComponentName;
+</code>

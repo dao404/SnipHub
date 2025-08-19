@@ -1,0 +1,78 @@
+% LaTeX Hello World 示例
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{Hello World in \LaTeX}
+\author{SnipHub 用户}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{介绍}
+这是一个简单的 \LaTeX{} 文档示例，用于展示基本的 \LaTeX{} 语法和功能。
+
+\section{基本公式}
+以下是一些数学公式示例：
+
+\begin{equation}
+E = mc^2
+\end{equation}
+
+\begin{equation}
+F = G \frac{m_1 m_2}{r^2}
+\end{equation}
+
+\begin{equation}
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+\end{equation}
+
+\section{矩阵示例}
+\begin{equation}
+A = 
+\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+\end{equation}
+
+\section{列表示例}
+\subsection{无序列表}
+\begin{itemize}
+  \item 第一项
+  \item 第二项
+  \item 第三项
+\end{itemize}
+
+\subsection{有序列表}
+\begin{enumerate}
+  \item 第一项
+  \item 第二项
+  \item 第三项
+\end{enumerate}
+
+\section{表格示例}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+语言 & 创建年份 & 主要用途 \\
+\hline
+LaTeX & 1984 & 排版系统 \\
+Python & 1991 & 数据科学 \\
+JavaScript & 1995 & Web开发 \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{图片示例}
+% \includegraphics[width=0.5\textwidth]{example-image}
+
+\section{超链接示例}
+\href{https://www.latex-project.org/}{LaTeX 项目官网}
+
+\end{document}

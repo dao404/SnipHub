@@ -1,0 +1,60 @@
+<set>
+{
+  "name": "Vue 3 组件",
+  "description": "创建一个 Vue 3 组件，使用 Composition API",
+  "language": "vue",
+  "prefix": "sh.vue3.component"
+}
+</set>
+<code lang="vue">
+<template>
+  <div class="container">
+    <h1>{{ title }}</h1>
+    
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+
+// 定义属性
+const props = defineProps({
+  propName: {
+    type: String,
+    required: true,
+    default: ''
+  }
+});
+
+// 定义事件
+const emit = defineEmits(['update']);
+
+// 定义响应式状态
+const count = ref(0);
+
+// 计算属性
+const doubleCount = computed(() => {
+  return count.value * 2;
+});
+
+// 生命周期钩子
+onMounted(() => {
+  console.log('组件已挂载');
+  // 初始化逻辑
+});
+
+// 方法
+function increment() {
+  count.value++;
+  emit('update', count.value);
+}
+</script>
+
+<style scoped>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+</style>
+</code>
