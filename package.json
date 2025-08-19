@@ -3,9 +3,11 @@
   "displayName": "%displayName%",
   "description": "%description%",
   "version": "0.0.1",
+  "publisher": "Frank6",
   "engines": {
     "vscode": "^1.74.0"
   },
+  "icon": "icons/icon.png",
   "categories": [
     "Snippets",
     "Other"
@@ -178,5 +180,9 @@
   },
   "dependencies": {
     "fs-extra": "^11.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dao404/SnipHub.git"
   }
 }
