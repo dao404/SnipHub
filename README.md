@@ -1,13 +1,25 @@
 # SnipHub
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Frank6.sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=Frank6.sniphub)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Frank6.sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=Frank6.sniphub) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Pages](https://img.shields.io/github/deployments/dao404/SnipHub/github-pages?label=gh-pages)](https://dao404.github.io/SnipHub/)
 
 A convenient VS Code extension for code snippet management, allowing you to easily define and manage code snippets within your project directory and quickly apply them through intelligent code completion suggestions.
 
 While current AI code generation tools can meet certain development needs, the generated code often fails to align with project-specific architectural designs and coding standards. To prevent code quality degradation and technical debt accumulation, we developed this project. SnipHub enables development teams to preset standard-compliant code snippet templates within projects, supports on-demand usage, and can be shared with team members through Git repositories, thus achieving standardized code reuse and management.
 
 **🌍 README:** [English](README.md) | [中文](README.zh-cn.md)
+
+## 📺 Demo
+
+### Quick Save Snippet Demo
+
+![Quick Save Snippet](docs/public/how-to-use-save-snippet.gif)
+
+---
+
+### Snippet Application Demo
+
+![Snippet Application](docs/public/how-to-use-use-snippet.gif)
 
 ## ✨ Features
 
@@ -130,8 +142,11 @@ npm run watch
 ### Building
 
 ```bash
-# Compile for production
-npm run vscode:prepublish
+# Package
+vsce package
+
+# Publish
+vsce publish
 ```
 
 ### Testing
@@ -177,8 +192,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## Star History
 
-
-## 🙏 Acknowledgments
-
-- Thanks to myself for developing this project 😄
+[![Star History Chart](https://api.star-history.com/svg?repos=dao404/SnipHub&type=Timeline)](https://www.star-history.com/#dao404/SnipHub&Timeline)

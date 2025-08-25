@@ -1,13 +1,25 @@
 # SnipHub
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Frank6.sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=Frank6.sniphub)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/Frank6.sniphub.svg)](https://marketplace.visualstudio.com/items?itemName=Frank6.sniphub) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Pages](https://img.shields.io/github/deployments/dao404/SnipHub/github-pages?label=gh-pages)](https://dao404.github.io/SnipHub/)
 
 **🌍 README:** [English](README.md) | [中文](README.zh-cn.md)
 
 一个便捷的 VS Code 代码片段管理扩展，让您能够在项目目录中轻松定义和管理代码片段，通过智能代码补全提示实现快速调用。
 
 尽管当前的 AI 代码生成工具发展已经能够满足一定程度的开发需求，但其生成的代码往往无法完全契合项目既定的架构设计和代码规范。为了防止代码质量下降和技术债务积累，我开发了这个项目。SnipHub 允许开发者在项目中预设符合规范的代码片段模板，在开发过程中按需调用，并可通过 Git 仓库与团队成员共享，从而实现标准化的代码复用和管理。
+
+## 📺 演示
+
+### 快速保存代码片段演示
+
+![快速保存代码片段](docs/public/how-to-use-save-snippet.gif)
+
+---
+
+### 代码片段应用演示
+
+![代码片段应用](docs/public/how-to-use-use-snippet.gif)
 
 ## ✨ 功能特点
 
@@ -132,8 +144,11 @@ npm run watch
 ### 构建
 
 ```bash
-# 生产环境编译
-npm run vscode:prepublish
+# 打包
+vsce package
+
+# 发布
+vsce publish
 ```
 
 ### 测试
@@ -179,8 +194,7 @@ SnipHub 支持多种语言:
 
 此项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
 
+## Star History
 
+[![Star History Chart](https://api.star-history.com/svg?repos=dao404/SnipHub&type=Timeline)](https://www.star-history.com/#dao404/SnipHub&Timeline)
 
-## 🙏 致谢
-
-- 感谢我自己开发了这个项目😄
